@@ -17,8 +17,8 @@ def __formatter_logic(__convert_to, transpiled_sql):
     return _fmt_sql
 
 
-def __transpile_logic(__convert_from, __convert_to, sql_query):
-    _processed_sql_query = sqlparse.format(sql_query, strip_comments=True).strip()
+def __transpile_logic(__convert_from, __convert_to, sql_query, strip_comments=True):
+    _processed_sql_query = sqlparse.format(sql_query, strip_comments=strip_comments).strip()
     transpiled_sql = sqlglot.transpile(
         _processed_sql_query,
         read=__convert_from,
@@ -28,9 +28,10 @@ def __transpile_logic(__convert_from, __convert_to, sql_query):
     return transpiled_sql
 
 
-def transpile_sql_code(sql_query, __convert_from, __convert_to):
+def transpile_sql_code(sql_query: str, __convert_from: str, __convert_to: str, **kwargs) -> str:
+    validate_strip_comments = kwargs.get("strip_comments", True)
     """ transpile logic """
-    transpiled_sql = __transpile_logic(__convert_from, __convert_to, sql_query)
+    transpiled_sql = __transpile_logic(__convert_from, __convert_to, sql_query, validate_strip_comments)
     """ formatting logic """
     formatted_sql = __formatter_logic(__convert_to, transpiled_sql)
 
