@@ -1,5 +1,7 @@
 streamlit
 streamlit_ace
+st-annotated-text
 sqlglot
 sqlparse
+from_root
 pandas==1.5.2

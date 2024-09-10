@@ -1,7 +1,7 @@
 import sqlglot
 import sqlparse
 
-from sql_transpiler_dev.sybase.sybase_transpiler import sybase_formatting_logic
+from sql_transpiler_logic.sybase.sybase_transpiler import sybase_formatting_logic
 
 
 def __formatter_logic(__convert_to, transpiled_sql):
@@ -28,8 +28,8 @@ def __transpile_logic(__convert_from, __convert_to, sql_query, strip_comments=Tr
     return transpiled_sql
 
 
-def transpile_sql_code(sql_query: str, __convert_from: str, __convert_to: str, **kwargs) -> str:
-    validate_strip_comments = kwargs.get("strip_comments", True)
+def transpile_sql_code(sql_query: str, __convert_from: str, __convert_to: str, **options) -> str:
+    validate_strip_comments = options.get("strip_comments", True)
     """ transpile logic """
     transpiled_sql = __transpile_logic(__convert_from, __convert_to, sql_query, validate_strip_comments)
     """ formatting logic """
